@@ -7,7 +7,7 @@ from .. import (
     parse_eval_stmt,
     parse_condition_stmt
 )
-from . import Writer
+from .base import Writer
 from .. import (
     EvalStmt,
     IfStmt,
@@ -197,12 +197,13 @@ class PythonWriter(Writer):
         return ''.join(astnode_to_python(compare_stmt))
 
 def convert_to_python(value):
+    """ Convert a java-like expression to valid python code """
     tree = ast.parse(prepare_expr(value))
     node = tree.body[0].value
     return ''.join(astnode_to_python(node))
 
 def astnode_to_python(node):
-    """ convert an AST node to its PHP representation """
+    """ Convert an AST node to its PHP representation """
     if isinstance(node, ast.Attribute):
         return astnode_to_python(node.value) + ['.', node.attr]
     if isinstance(node, ast.BinOp):

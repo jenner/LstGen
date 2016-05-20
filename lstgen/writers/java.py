@@ -7,7 +7,7 @@ from .. import (
     parse_eval_stmt,
     parse_condition_stmt
 )
-from . import Writer
+from .base import Writer
 from .. import (
     EvalStmt,
     IfStmt,
@@ -159,6 +159,7 @@ class JavaWriter(Writer):
         return ''.join(self.astnode_to_java(compare_stmt))
 
     def convert_to_java(self, value):
+        """ Converts java pseudo code into valid java code """
         tree = ast.parse(prepare_expr(value))
         node = tree.body[0].value
         return ''.join(self.astnode_to_java(node))

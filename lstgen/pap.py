@@ -2,12 +2,12 @@
 """
 PAP XML and remote API URLs
 """
-import requests
-from lxml import etree
 from collections import (
     namedtuple,
     OrderedDict
 )
+import requests
+from lxml import etree
 
 PAP_BASE_URL = 'https://www.bmf-steuerrechner.de'
 
@@ -70,6 +70,9 @@ PAP_RESOURCES = OrderedDict((
 
 
 def get_pap_xml(pap_resource_name):
+    """ Fetch PAP XML from bmf-steuerrechner.de and return
+        it as a string.
+    """
     resource = PAP_RESOURCES.get(pap_resource_name)
     if not resource:
         raise ValueError("Invalid PAP resource name: {}".format(pap_resource_name))

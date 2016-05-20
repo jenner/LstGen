@@ -10,7 +10,7 @@ from .. import (
     parse_condition_stmt,
     remove_size_literal
 )
-from . import Writer
+from .base import Writer
 from .. import (
     EvalStmt,
     IfStmt,
@@ -49,12 +49,13 @@ class PhpWriter(Writer):
         if self.ns_name:
             self.writeln("namespace {};".format(self.ns_name))
             self.nl()
-        self.writeln("include('vendor/autoload.php');")
-        self.writeln("use Brick\Math\BigDecimal as BigDecimal;")
-        self.writeln("use Brick\Math\RoundingMode as RoundingMode;")
+        self.writeln(r"include('vendor/autoload.php');")
+        self.writeln(r"use Brick\Math\BigDecimal as BigDecimal;")
+        self.writeln(r"use Brick\Math\RoundingMode as RoundingMode;")
         self.nl()
 
     def generate(self):
+        """ Generates PHP code """
         class_name = self.class_name if self.class_name else self.parser.internal_name
         self._write_preamble()
         self.writeln('class {} {{'.format(class_name))
