@@ -211,8 +211,8 @@ STMT_MAP = {
 
 class PapParser:
 
-    def __init__(self, tree):
-        self.tree = tree
+    def __init__(self, tree_root):
+        self.tree_root = tree_root
         self.internal_name = None
         self._input_vars = None
         self._output_vars = None
@@ -223,8 +223,8 @@ class PapParser:
 
     def parse(self):
         self.repair_tree()
-        self.internal_name = self.tree.getroot().get('name')
-        main_element = self.tree.xpath('/PAP/METHODS/MAIN')[0]
+        self.internal_name = self.tree_root.get('name')
+        main_element = self.tree_root.xpath('/PAP/METHODS/MAIN')[0]
         main_element.set('name', 'MAIN')
         self.main_method = Method.from_element(main_element)
 
@@ -232,7 +232,7 @@ class PapParser:
         """ Move <else></else> element outside of an <if></if> element
             back into <if> parent, see e.g. method MZTABFB from Lohnsteuer2010.xml
         """
-        for elm in self.tree.xpath('//IF'):
+        for elm in self.tree_root.xpath('//IF'):
             else_elm = elm.getnext()
             if else_elm is not None and else_elm.tag == 'ELSE':
                 elm.getparent().remove(else_elm)
@@ -242,12 +242,12 @@ class PapParser:
     def methods(self):
         if not self._methods:
             self._methods = []
-            for method in self.tree.xpath('/PAP/METHODS/METHOD'):
+            for method in self.tree_root.xpath('/PAP/METHODS/METHOD'):
                 self._methods.append(Method.from_element(method))
         return self._methods
 
     def _get_vars(self, xpath):
-        for var in self.tree.xpath(xpath):
+        for var in self.tree_root.xpath(xpath):
             yield Var.from_element(var)
 
     @property
@@ -273,6 +273,6 @@ class PapParser:
         if not self._constants:
             self._constants = [
                 Const.from_element(const)
-                for const in self.tree.xpath('/PAP/CONSTANTS/CONSTANT')
+                for const in self.tree_root.xpath('/PAP/CONSTANTS/CONSTANT')
             ]
         return self._constants
