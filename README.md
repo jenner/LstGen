@@ -22,7 +22,7 @@ easy_install install lstgen
 Danach ist das Program `lstgen` (für gewöhnlich)  unter `/usr/local/bin/lstgen`
 verfügbar.
 
-## Beispiel: Erzeugen einer PHP-Datei zur Berechnung der Lohnsteuer für das Jahr 2016:
+## Beispiel 1: Erzeugen einer PHP-Datei zur Berechnung der Lohnsteuer für das Jahr 2016:
 ```bash
 lstgen 2016 php --class-name Lohnsteuer2016 > Lohnsteuer2016.php
 ```
@@ -61,3 +61,59 @@ mit Steuerklasse 1, monatlichem Brutto von 5000€, privat versichert und ohne A
 Eine detaillierte Erklärung zu den jeweiligen Eingabeparametern findet man entweder im generierten Code in
 Form von Kommentaren oder in der PDF Version des PAP unter https://www.bmf-steuerrechner.de/interface/pap.jsp
 
+## Beispiel 2: Erzeugen einer Python-Datei zur Berechnung der Lohnsteuer für das Jahr 2014:
+```bash
+lstgen 2014 python --class-name Lohnsteuer2014 > lst2014.py
+```
+
+Der generierte Code kann dann so verwendet werden:
+```python
+import math
+from lst2014 import Lohnsteuer2014
+
+def print_lst(lst):
+    steuer = math.floor(float(lst.getLstlzz()) + float(lst.getStv()) + float(lst.getSts())) / 100.0;
+    soli = math.floor(float(lst.getSolzlzz()) + float(lst.getSolzs()) + float(lst.getSolzv())) / 100;
+    stges = steuer + soli
+    print("steuer: {steuer}\nsoli: {soli}\nstges: {stges}".format(
+        steuer=steuer,
+        soli=soli,
+        stges=stges
+    ))
+
+brutto = 500000 # Brutto in ¢ent
+# Setzen der Parameter mit Settern
+lst2014 = Lohnsteuer2014()
+lst2014.setRe4(brutto) # cent
+lst2014.setPkv(1)
+lst2014.setAlter1(0)
+lst2014.setAf(0)
+lst2014.setF(1)
+lst2014.setPvs(0)
+lst2014.setR(0)
+lst2014.setLzzhinzu(0)
+lst2014.setPvz(0)
+lst2014.setStkl(1)
+lst2014.setLzz(2)
+lst2014.setKrv(2)
+lst2014.MAIN()
+print_lst(lst2014)
+
+# Setzen der Parameter mittels Konstruktor-Argumente
+lst2014 = Lohnsteuer2014(
+    RE4=brutto,
+    PKV=1,
+    ALTER1=0,
+    af=0,
+    f=1,
+    PVS=0,
+    R=0,
+    LZZHINZU=0,
+    PVZ=0,
+    STKL=1,
+    LZZ=2,
+    KRV=2
+)
+print_lst(lst2014)
+
+```
