@@ -19,7 +19,7 @@ setup(name='LstGen',
     long_description=README + '\n\n' + CHANGES,
     classifiers=[
         "Programming Language :: Python",
-        "Topic :: Application"
+        "Topic :: Software Development :: Code Generators"
     ],
     author='Igor Stroh',
     author_email='igor.stroh@rulim.de',
