@@ -7,7 +7,12 @@ with open(os.path.join(here, 'README.md')) as f:
     README = f.read()
 with open(os.path.join(here, 'CHANGES.md')) as f:
     CHANGES = f.read()
-
+long_description = README + "\n\n" + CHANGES
+try:
+    import pypandoc
+    long_description = pypandoc.convert(long_description, 'rst', format='md')
+except(IOError, ImportError):
+    pass
 requires = [
     'lxml',
     'requests'
@@ -16,7 +21,7 @@ requires = [
 setup(name='LstGen',
     version='0.1.0',
     description='LstGen',
-    long_description=README + '\n\n' + CHANGES,
+    long_description=long_description,
     classifiers=[
         "Programming Language :: Python",
         "Topic :: Software Development :: Code Generators"
