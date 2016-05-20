@@ -22,7 +22,7 @@ easy_install install lstgen
 Danach ist das Program `lstgen` (für gewöhnlich)  unter `/usr/local/bin/lstgen`
 verfügbar.
 
-## Beispiel 1: Erzeugen einer PHP-Datei zur Berechnung der Lohnsteuer für das Jahr 2016:
+## Beispiel 1: Erzeugen einer PHP-Datei zur Berechnung der Lohnsteuer für das Jahr 2016
 ```bash
 lstgen 2016 php --class-name Lohnsteuer2016 > Lohnsteuer2016.php
 ```
@@ -61,7 +61,7 @@ mit Steuerklasse 1, monatlichem Brutto von 5000€, privat versichert und ohne A
 Eine detaillierte Erklärung zu den jeweiligen Eingabeparametern findet man entweder im generierten Code in
 Form von Kommentaren oder in der PDF Version des PAP unter https://www.bmf-steuerrechner.de/interface/pap.jsp
 
-## Beispiel 2: Erzeugen einer Python-Datei zur Berechnung der Lohnsteuer für das Jahr 2014:
+## Beispiel 2: Erzeugen einer Python-Datei zur Berechnung der Lohnsteuer für das Jahr 2014 (gleiche Voraussetzungen wie im PHP Beispiel)
 ```bash
 lstgen 2014 python --class-name Lohnsteuer2014 > lst2014.py
 ```
@@ -72,8 +72,8 @@ import math
 from lst2014 import Lohnsteuer2014
 
 def print_lst(lst):
-    steuer = math.floor(float(lst.getLstlzz()) + float(lst.getStv()) + float(lst.getSts())) / 100.0;
-    soli = math.floor(float(lst.getSolzlzz()) + float(lst.getSolzs()) + float(lst.getSolzv())) / 100;
+    steuer = math.floor(float(lst.getLstlzz()) + float(lst.getStv()) + float(lst.getSts())) / 100.0
+    soli = math.floor(float(lst.getSolzlzz()) + float(lst.getSolzs()) + float(lst.getSolzv())) / 100
     stges = steuer + soli
     print("steuer: {steuer}\nsoli: {soli}\nstges: {stges}".format(
         steuer=steuer,
