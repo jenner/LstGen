@@ -17,7 +17,7 @@ pip install lstgen
 ```
 oder
 ```bash
-easy_install install lstgen
+easy_install lstgen
 ```
 Danach ist das Program `lstgen` (für gewöhnlich)  unter `/usr/local/bin/lstgen`
 verfügbar.
