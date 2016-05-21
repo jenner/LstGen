@@ -1,4 +1,10 @@
-0.0
+0.1.1
 ---
 
--  Initial version
+- Fixed packaging issues for README.md and CHANGES.md
+
+
+0.1.0
+---
+
+- Initial version
