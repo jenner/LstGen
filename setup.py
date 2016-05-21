@@ -19,7 +19,7 @@ requires = [
 ]
 
 setup(name='LstGen',
-    version='0.1.0',
+    version='0.1.1',
     description='LstGen',
     long_description=long_description,
     classifiers=[
