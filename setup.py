@@ -16,7 +16,6 @@ except(IOError, ImportError):
 requires = [
     'lxml',
     'requests',
-    'six'
 ]
 testing_extras = requires + [
     'nose',
@@ -24,7 +23,7 @@ testing_extras = requires + [
 ]
 
 setup(name='LstGen',
-    version='0.1.1',
+    version='0.2.0',
     description='LstGen',
     long_description=long_description,
     classifiers=[

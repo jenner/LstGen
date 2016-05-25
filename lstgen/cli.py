@@ -5,7 +5,6 @@ LstGen command line utils
 import sys
 import os
 import argparse
-import six
 import codecs
 
 from lxml import etree
