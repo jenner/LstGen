@@ -15,7 +15,12 @@ except(IOError, ImportError):
     pass
 requires = [
     'lxml',
-    'requests'
+    'requests',
+    'six'
+]
+testing_extras = requires + [
+    'nose',
+    'coverage',
 ]
 
 setup(name='LstGen',
@@ -24,18 +29,22 @@ setup(name='LstGen',
     long_description=long_description,
     classifiers=[
         "Programming Language :: Python",
+        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.4",
         "Topic :: Software Development :: Code Generators"
     ],
     author='Igor Stroh',
     author_email='igor.stroh@rulim.de',
     url='http://github.com/jenner/LstGen',
-    keywords='',
+    keywords='lohnsteuer code generator cli',
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
     install_requires=requires,
     tests_require=requires,
-    test_suite="lstgen",
+    extras_require = {
+        'testing': testing_extras,
+    },
     entry_points="""\
     [console_scripts]
     lstgen = lstgen.cli:main

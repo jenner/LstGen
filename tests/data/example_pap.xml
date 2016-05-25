@@ -1,0 +1,52 @@
+<PAP name="Lohnsteuer2100" version="1.0" versionNummer="1.0">
+<VARIABLES>
+    <INPUTS>
+        <!-- input var INFOO, type int, default 1 -->
+        <INPUT name="INFOO" type="int" default="1"/>
+
+        <!-- input var INBAR, type BigDecimal, no default -->
+        <INPUT name="INBAR" type="BigDecimal"/>
+
+        <INPUT name="INBLAH" type="int"/>
+    </INPUTS>
+    <OUTPUTS>
+        <!-- output var OUTFOO with ümläüts -->
+        <OUTPUT name="OUTFOO" type="BigDecimal"/>
+
+        <!-- output var OUTBAR with default -->
+        <OUTPUT name="OUTBAR" type="BigDecimal" default="new BigDecimal(20.1)"/>
+
+        <OUTPUT name="OUTBLAH" type="int"/>
+    </OUTPUTS>
+    <INTERNALS>
+        <!-- internal var INTFOO with ümläüts -->
+        <INTPUT name="INTFOO" type="BigDecimal"/>
+
+        <!-- internal var INTBAR with default -->
+        <INTPUT name="INTBAR" type="BigDecimal" default="new BigDecimal(20.1)"/>
+
+        <INTPUT name="INTBLAH" type="int"/>
+    </INTERNALS>
+    <CONSTANTS>
+        <!-- constant CONSTZAHL1 -->
+        <CONSTANT name="CONSTFOO" type="BigDecimal" value="BigDecimal.ONE"/>
+    </CONSTANTS>
+</VARIABLES>
+<METHODS>
+    <MAIN>
+        <EXECUTE method="MFOO"/>
+        <EVAL exec="INTBAR= BigDecimal.ZERO"/>
+        <EXECUTE method="MBAR"/>
+    </MAIN>
+
+    <!-- method MFOO -->
+    <METHOD name="MFOO">
+        <EVAL exec="OUTBLAH = INTFOO.divide(INTBAR, 2, BigDecimal.ROUND_UP)"/>
+    </METHOD>
+
+    <!-- method MBAR -->
+    <METHOD name="MBAR">
+        <EVAL exec="OUTBAR = INFOO.divide(OUTBAR, 2, BigDecimal.ROUND_UP)"/>
+    </METHOD>
+</METHODS>
+</PAP>

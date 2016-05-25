@@ -3,9 +3,11 @@
 Base writers module
 """
 from contextlib import contextmanager
-from abc import ABCMeta, abstractmethod
 
-class Writer(metaclass=ABCMeta):
+from .ast2code import AstToCode
+
+
+class Writer(object):
     """ Basic writer class used to write structured
         code with indentation to a file-like object.
     """
@@ -13,14 +15,14 @@ class Writer(metaclass=ABCMeta):
     default_indent_str = ' ' * 4
     """ Default indentation string (4 spaces)"""
 
-    def __init__(self, outfile, indent_str=None):
+    def __init__(self, outfile, indent_str=None, block_chars=(' {', '}')):
         self.outfile = outfile
+        self.block_chars = block_chars
         self.indent_str = indent_str if indent_str is not None else self.default_indent_str
         self.indent_lvl = 0
 
-    @abstractmethod
     def generate(self):
-        pass
+        raise Exception("Implement me!")
 
     def write(self, content, do_indent=True):
         """ Write content to outfile with optional indentation """
@@ -37,8 +39,7 @@ class Writer(metaclass=ABCMeta):
 
     def nl(self, num=1, do_indent=False):
         """ Write a new-line to outfile """
-        for i in range(num):
-            self.write("\n", do_indent)
+        self.write("\n" * num, do_indent)
 
     def inc_indent(self, lvl=1):
         """ Increase indentation level """
@@ -50,15 +51,29 @@ class Writer(metaclass=ABCMeta):
             self.indent_lvl -= lvl
 
     @contextmanager
-    def indent(self, lvl=1):
+    def indent(self, preamble, lvl=1):
         """ Allows creating visual indented blocks
             that produce actual code blocks:
 
-            x.writeln('def foo():')
-            with x.indent():
+            with x.indent('def foo()'):
                 x.writeln('print("Hello World!"))
                 x.writeln('return 1')
         """
+        self.writeln('{}{}'.format(preamble, self.block_chars[0]))
         self.inc_indent(lvl)
         yield
         self.dec_indent(lvl)
+        if self.block_chars[1]:
+            self.writeln(self.block_chars[1])
+
+
+class BaseGenerator(AstToCode):
+    """ Base code generator class """
+
+    def __init__(self, parser, outfile, class_name=None, indent=None, block_chars=(' {', '}')):
+        self.writer = Writer(outfile, indent, block_chars)
+        self.parser = parser
+        self.class_name = class_name if class_name else self.parser.internal_name
+
+    def generate(self):
+        raise NotImplementedError("Implement me!")

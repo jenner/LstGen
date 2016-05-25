@@ -53,7 +53,7 @@ def prev_comment(element):
         comment = comment_elm.text
     return comment
 
-class Comment:
+class Comment(object):
     """ Represents an XML comment """
 
     def __init__(self, content):
@@ -65,7 +65,7 @@ class Comment:
         return cls(element.text)
 
 
-class SimpleStmt:
+class SimpleStmt(object):
     """ A simple statement without a body """
 
     def __init__(self, comment=None):
@@ -164,7 +164,7 @@ class Method(StmtWithBody):
         return method
 
 
-class Prop:
+class Prop(object):
     """ Base class for a variable or constant """
 
     def __init__(self, name, type):
@@ -236,7 +236,7 @@ STMT_MAP = {
     'MAIN': Method,
 }
 
-class PapParser:
+class PapParser(object):
     """ Parses a PAP XML file and prepares the contents
         for use by a language specific writer.
     """
@@ -250,6 +250,7 @@ class PapParser:
         self._constants = None
         self._methods = None
         self.main_method = None
+        self.parse()
 
     def parse(self):
         """ Parses the passed in XML doc root """
@@ -312,3 +313,8 @@ class PapParser:
                 for const in self.tree_root.xpath('/PAP/CONSTANTS/CONSTANT')
             ]
         return self._constants
+
+    @property
+    def constant_names(self):
+        """ Accessor for a set of constant names """
+        return set(const.name for const in self.constants)

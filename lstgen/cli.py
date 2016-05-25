@@ -5,13 +5,14 @@ LstGen command line utils
 import sys
 import os
 import argparse
-from io import StringIO
+import six
+import codecs
 
 from lxml import etree
 
 from . import PapParser
 from . import pap
-from .writers import WRITERS
+from .generators import GENERATORS
 
 LANGUAGES = ('php', 'python', 'java')
 
@@ -68,7 +69,7 @@ def main():
     parser.add_argument(
         '--indent',
         dest='indent',
-        default='    ',
+        default=u'    ',
         help='Zeichenkette mit der eingerückt wird, default: 4 Leerzeichen'
     )
     parser.add_argument(
@@ -110,20 +111,19 @@ def main():
 
     lang = args.lang.lower()
     pap_parser = PapParser(etree.fromstring(xml_content))
-    pap_parser.parse()
     is_stdout = False
     if not args.outfile:
         is_stdout = True
-        outfp = StringIO()
+        outfp = sys.stdout
     else:
-        outfp = open(args.outfile, 'w+')
+        outfp = codecs.open(args.outfile, 'w+', encoding='utf-8')
     with outfp:
-        writer_class = WRITERS.get(lang)
-        if not writer_class:
+        gen_class = GENERATORS.get(lang)
+        if not gen_class:
             error('No matching writer for langugage {}'.format(lang))
 
         if lang == 'php':
-            writer = writer_class(
+            generator = gen_class(
                 pap_parser,
                 outfp,
                 class_name=args.class_name,
@@ -131,20 +131,18 @@ def main():
                 indent=args.indent,
             )
         elif lang == 'python':
-            writer = writer_class(
+            generator = gen_class(
                 pap_parser,
                 outfp,
                 class_name=args.class_name,
                 indent=args.indent
             )
         elif lang == 'java':
-            writer = writer_class(
+            generator = gen_class(
                 pap_parser,
                 outfp,
                 class_name=args.class_name,
                 package_name=args.java_package,
                 indent=args.indent
             )
-        writer.generate()
-        if is_stdout:
-            print(outfp.getvalue())
+        generator.generate()
