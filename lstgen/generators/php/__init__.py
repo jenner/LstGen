@@ -35,10 +35,14 @@ class PhpGenerator(BaseGenerator):
     """ Name of the implicit instance variable """
 
     list_const_parens = ('array(', ')')
-    """ List/array constructor parenthesis, usually [], note that in case of PHP it's array() """
+    """ List/array constructor parenthesis, usually [], note that
+        in case of PHP it's array()
+    """
 
     allow_constants = False
-    """ Disallow class constants, since we cannot have instances of BigDecimal as constant values """
+    """ Disallow class constants, since we cannot have instances
+        of BigDecimal as constant values
+    """
 
     bd_attr_aliases = {
         'ZERO': 'zero()',

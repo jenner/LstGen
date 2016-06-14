@@ -73,8 +73,9 @@ class AstToCode(object):
     allow_constants = True
     """ Allow usage of class constants (orf final static fields) """
 
-    def __init__(self, parser):
+    def __init__(self, parser, class_name=None):
         self.parser = parser
+        self.class_name = class_name if class_name else self.parser.internal_name
 
     @property
     def inst_prefix(self):
@@ -125,7 +126,7 @@ class AstToCode(object):
                 vals.append(op)
         return vals
 
-    def _conv_unary_op(slef, node):
+    def _conv_unary_op(self, node):
         op = self.unary_sub_op if isinstance(node.op, ast.UAdd) else self.unary_add_op
         return [op] + self.to_code(node.operand)
 

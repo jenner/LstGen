@@ -1,26 +1,12 @@
 """
-Java writer
+Java generator
 """
 import ast
-from .. import (
-    prepare_expr,
-    parse_eval_stmt,
-    parse_condition_stmt
-)
-from .base import BaseGenerator
-from .. import (
-    EvalStmt,
-    IfStmt,
-    ThenStmt,
-    ElseStmt,
-    ExecuteStmt,
-)
+from .. import prepare_expr
+from .base import JavaLikeGenerator
 
-class JavaGenerator(BaseGenerator):
+class JavaGenerator(JavaLikeGenerator):
     """ Java Generator """
-
-    instance_var = 'this'
-    """ Name of the implicit instance variable (if any) """
 
     def __init__(self, parser, outfile, class_name=None, indent=None, package_name='default'):
         super(JavaGenerator, self).__init__(parser, outfile, class_name, indent)
@@ -100,54 +86,6 @@ class JavaGenerator(BaseGenerator):
         # actual method body
         with self.writer.indent(signature):
             self._write_stmt_body(method)
-
-    def _write_comment(self, comment, simple=True):
-        lines = comment.split("\n")
-        if not simple:
-            self.writer.writeln('/**')
-        prefix = '// ' if simple else ' * '
-        for line in lines:
-            self.writer.writeln(u'{}{}'.format(prefix, line.strip()))
-        if not simple:
-            self.writer.writeln(' */')
-
-    def _write_stmt_body(self, stmt):
-        for part in stmt.body:
-            if isinstance(part, EvalStmt):
-                self.writer.writeln(self._convert_exec(part.expr))
-            elif isinstance(part, ExecuteStmt):
-                self.writer.writeln('this.{}();'.format(part.method_name))
-            elif isinstance(part, IfStmt):
-                self._write_if(part)
-            elif isinstance(part, ElseStmt):
-                self._write_else(part)
-            elif isinstance(part, ThenStmt):
-                self._write_stmt_body(part)
-
-    def _write_if(self, stmt):
-        converted = self._convert_if(stmt.condition)
-        with self.writer.indent('if ({})'.format(converted)):
-            self._write_stmt_body(stmt)
-
-    def _write_else(self, stmt):
-        if not stmt.body:
-            # avoid empty else stmts
-            return
-        self.writer.dec_indent()
-        self.writer.writeln('} else {')
-        self.writer.inc_indent()
-        self._write_stmt_body(stmt)
-
-    def _convert_exec(self, expr):
-        (var, parsed_stmt) = parse_eval_stmt(expr)
-        ret = ['this.', var, ' = ']
-        ret += self.to_code(parsed_stmt)
-        ret.append(';')
-        return ''.join(ret)
-
-    def _convert_if(self, expr):
-        compare_stmt = parse_condition_stmt(expr)
-        return ''.join(self.to_code(compare_stmt))
 
     def convert_to_java(self, value):
         """ Converts java pseudo code into valid java code """

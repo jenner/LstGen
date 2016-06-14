@@ -13,7 +13,7 @@ from . import PapParser
 from . import pap
 from .generators import GENERATORS
 
-LANGUAGES = ('php', 'python', 'java')
+LANGUAGES = sorted(GENERATORS.keys())
 
 def error(msg):
     """ Show an error message and exit """
@@ -38,7 +38,8 @@ def main():
         dest='pap_version',
         choices=pap.PAP_RESOURCES.keys(),
         metavar='PAP',
-        help='PAP Version (z.B. "2016"), falls kein PAP XML Pfad angegeben wurde, siehe auch Option --pap-versions'
+        help=('PAP Version (z.B. "2016"), falls kein PAP XML Pfad '
+              'angegeben wurde, siehe auch Option --pap-versions')
     )
     parser.add_argument(
         '-x', '--pap-xml',
@@ -110,9 +111,7 @@ def main():
 
     lang = args.lang.lower()
     pap_parser = PapParser(etree.fromstring(xml_content))
-    is_stdout = False
     if not args.outfile:
-        is_stdout = True
         outfp = sys.stdout
     else:
         outfp = codecs.open(args.outfile, 'w+', encoding='utf-8')
@@ -142,6 +141,13 @@ def main():
                 outfp,
                 class_name=args.class_name,
                 package_name=args.java_package,
+                indent=args.indent
+            )
+        elif lang == 'javascript':
+            generator = gen_class(
+                pap_parser,
+                outfp,
+                class_name=args.class_name,
                 indent=args.indent
             )
         generator.generate()
