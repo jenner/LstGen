@@ -5,10 +5,11 @@ unter https://www.bmf-steuerrechner.de zur Verfügung stehen, validen Code
 generieren, mit dem man ohne weitere Abhängigkeiten (wie z.B. einem externen
 Service) die Lohnsteuer berechnen kann.
 
-Zur Zeit werden drei Sprachen unterstützt:
+Zur Zeit werden view Sprachen unterstützt:
 * PHP
 * Python
 * Java
+* Javascript
 
 ## Installation
 * Mit `pip` oder `easy_install` aus PyPI:
@@ -24,7 +25,7 @@ verfügbar.
 
 ## Beispiel 1: Erzeugen einer PHP-Datei zur Berechnung der Lohnsteuer für das Jahr 2016
 ```bash
-lstgen 2016 php --class-name Lohnsteuer2016 > Lohnsteuer2016.php
+lstgen 2016 php --class-name Lohnsteuer2016 --outfile Lohnsteuer2016.php
 ```
 Der generierte Code benötigt für die Berechnung die [Brick\Math Bibliothek](https://github.com/brick/math)
 und geht davon aus, dass sie mittels [Composer](https://getcomposer.org/) installiert wurde.
@@ -63,7 +64,7 @@ Form von Kommentaren oder in der PDF Version des PAP unter https://www.bmf-steue
 
 ## Beispiel 2: Erzeugen einer Python-Datei zur Berechnung der Lohnsteuer für das Jahr 2014 (gleiche Voraussetzungen wie im PHP Beispiel)
 ```bash
-lstgen 2014 python --class-name Lohnsteuer2014 > lst2014.py
+lstgen 2014 python --class-name Lohnsteuer2014 --outfile lst2014.py
 ```
 
 Der generierte Code kann dann so verwendet werden:
