@@ -5,7 +5,7 @@ unter https://www.bmf-steuerrechner.de zur Verfügung stehen, validen Code
 generieren, mit dem man ohne weitere Abhängigkeiten (wie z.B. einem externen
 Service) die Lohnsteuer berechnen kann.
 
-Zur Zeit werden view Sprachen unterstützt:
+Zur Zeit werden vier Sprachen unterstützt:
 * PHP
 * Python
 * Java
