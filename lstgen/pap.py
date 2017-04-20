@@ -66,6 +66,10 @@ PAP_RESOURCES = OrderedDict((
         '/interface/2016V1.jsp',
         '/pruefdaten/Lohnsteuer2016.xml'
     )),
+    ('2017', PapResource(
+        '/interface/2016V1.jsp',
+        '/pruefdaten/Lohnsteuer2017.xml'
+    )),
 ))
 
 
