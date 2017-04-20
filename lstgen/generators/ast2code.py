@@ -127,7 +127,7 @@ class AstToCode(object):
         return vals
 
     def _conv_unary_op(self, node):
-        op = self.unary_sub_op if isinstance(node.op, ast.UAdd) else self.unary_add_op
+        op = self.unary_sub_op if isinstance(node.op, ast.USub) else self.unary_add_op
         return [op] + self.to_code(node.operand)
 
     def _conv_list_subscript(self, node):
