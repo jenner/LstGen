@@ -1,3 +1,6 @@
+# 0.3.2
+* Make pypi happy
+
 # 0.3.1
 * Added support for 2017 PAP
 * Fixed unary operator conversion
