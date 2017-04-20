@@ -1,3 +1,9 @@
+# 0.3.1
+* Added support for 2017 PAP
+* Fixed unary operator conversion
+* Replaced Decimal.\_rescale with Decimal.quantize to
+  remain python3 compliant
+
 # 0.3.0
 * Added JS support
 * Refactored generators for java-like languages
