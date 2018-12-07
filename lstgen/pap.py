@@ -15,60 +15,68 @@ PapResource = namedtuple('PapResource', ('remote_service_path', 'pap_xml_path'))
 
 PAP_RESOURCES = OrderedDict((
     ('2006', PapResource(
-        '/interface/2006.jsp',
-        '/pruefdaten/Lohnsteuer2006Big.xml'
+        '/interface/2006Version1.xhtml',
+        '/javax.faces.resource/daten/xmls/Lohnsteuer2006Big.xml.xhtml'
     )),
     ('2007', PapResource(
-        '/interface/2007.jsp',
-        '/pruefdaten/Lohnsteuer2007Big.xml'
+        '/interface/2007Version1.xhtml',
+        '/javax.faces.resource/daten/xmls/Lohnsteuer2007Big.xml.xhtml'
     )),
     ('2008', PapResource(
-        '/interface/2008.jsp',
-        '/pruefdaten/Lohnsteuer2008Big.xml'
+        '/interface/2008Version1.xhtml',
+        '/javax.faces.resource/daten/xmls/Lohnsteuer2008Big.xml.xhtml'
     )),
     ('2009', PapResource(
-        '/interface/2009.jsp',
-        '/pruefdaten/Lohnsteuer2009Big.xml'
+        '/interface/2009Version1.xhtml',
+        '/javax.faces.resource/daten/xmls/Lohnsteuer2009Big.xml.xhtml'
     )),
     ('2010', PapResource(
-        '/interface/2010.jsp',
-        '/pruefdaten/Lohnsteuer2010Big.xml'
+        '/interface/2010Version1.xhtml',
+        '/javax.faces.resource/daten/xmls/Lohnsteuer2010Big.xml.xhtml'
     )),
     ('2011bisNov', PapResource(
-        '/interface/2011bisNov.jsp',
-        '/pruefdaten/Lohnsteuer2011BisNovember.xml'
+        '/interface/2011bisNovVersion1.xhtml',
+        '/javax.faces.resource/daten/xmls/Lohnsteuer2011BisNovember.xml.xhtml'
     )),
     ('2011Dez', PapResource(
-        '/interface/2011Dez.jsp',
-        '/pruefdaten/Lohnsteuer2011Dezember.xml'
+        '/interface/2011DezVersion1.xhtml',
+        '/javax.faces.resource/daten/xmls/Lohnsteuer2011Dezember.xml.xhtml'
     )),
     ('2012', PapResource(
-        '/interface/2012.jsp',
-        '/pruefdaten/Lohnsteuer2012.xml'
+        '/interface/2012Version1.xhtml',
+        '/javax.faces.resource/daten/xmls/Lohnsteuer2012.xml.xhtml'
     )),
     ('2013', PapResource(
-        '/interface/2013.jsp',
-        '/pruefdaten/Lohnsteuer2013_2.xml'
+        '/interface/2013Version1.xhtml',
+        '/javax.faces.resource/daten/xmls/Lohnsteuer2013.xml.xhtml'
     )),
     ('2014', PapResource(
-        '/interface/2014.jsp',
-        '/pruefdaten/Lohnsteuer2014.xml'
+        '/interface/2014Version1.xhtml',
+        '/javax.faces.resource/daten/xmls/Lohnsteuer2014.xml.xhtml'
     )),
     ('2015bisNov', PapResource(
-        '/interface/2015bisNov.jsp',
-        '/pruefdaten/Lohnsteuer2015BisNovember.xml'
+        '/interface/2015bisNovVersion1.xhtml',
+        '/javax.faces.resource/daten/xmls/Lohnsteuer2015BisNovember.xml.xhtml'
     )),
     ('2015Dez', PapResource(
-        '/interface/2015Dez.jsp',
-        '/pruefdaten/Lohnsteuer2015Dezember.xml'
+        '/interface/2015DezVersion1.xhtml',
+        '/javax.faces.resource/daten/xmls/Lohnsteuer2015Dezember.xml.xhtml'
     )),
     ('2016', PapResource(
-        '/interface/2016V1.jsp',
-        '/pruefdaten/Lohnsteuer2016.xml'
+        '/interface/2016Version1.xhtml',
+        '/javax.faces.resource/daten/xmls/Lohnsteuer2016.xml.xhtml'
     )),
     ('2017', PapResource(
-        '/interface/2016V1.jsp',
-        '/pruefdaten/Lohnsteuer2017.xml'
+        '/interface/2017Version1.xhtml',
+        '/javax.faces.resource/daten/xmls/Lohnsteuer2017.xml.xhtml'
+    )),
+    ('2018', PapResource(
+        '/interface/2018Version1.xhtml',
+        '/javax.faces.resource/daten/xmls/Lohnsteuer2018.xml.xhtml'
+    )),
+    ('2019', PapResource(
+        '/interface/2019Version1.xhtml',
+        '/javax.faces.resource/daten/xmls/Lohnsteuer2019.xml.xhtml'
     )),
 ))
 
