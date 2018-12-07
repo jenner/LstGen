@@ -1,3 +1,8 @@
+# 0.4.0
+* Added PAP for 2018 and 2019
+* Fixed BMF URIs
+* Added "version" cli option 
+
 # 0.3.2
 * Make pypi happy
 
