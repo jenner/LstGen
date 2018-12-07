@@ -6,6 +6,7 @@ import sys
 import os
 import argparse
 import codecs
+import pkg_resources
 
 from lxml import etree
 
@@ -22,11 +23,18 @@ def error(msg):
     sys.stderr.flush()
     sys.exit(1)
 
+def get_version():
+    return pkg_resources.get_distribution('lstgen').version
+
 def main():
     """ main lstgen function """
     parser = argparse.ArgumentParser(
         description='Erzeugt validen Code für die Lohnsteuerberechung aus PAP XML'
     )
+    parser.add_argument(
+        '-V', '--version',
+        action='version',
+        version='LstGen Version {}'.format(get_version()))
     parser.add_argument(
         '-l', '--lang',
         dest='lang',
