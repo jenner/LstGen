@@ -25,7 +25,7 @@ verfügbar.
 
 ## Beispiel 1: Erzeugen einer PHP-Datei zur Berechnung der Lohnsteuer für das Jahr 2016
 ```bash
-lstgen 2016 php --class-name Lohnsteuer2016 --outfile Lohnsteuer2016.php
+lstgen -p 2016 -l php --class-name Lohnsteuer2016 --outfile Lohnsteuer2016.php
 ```
 Der generierte Code benötigt für die Berechnung die [Brick\Math Bibliothek](https://github.com/brick/math)
 und geht davon aus, dass sie mittels [Composer](https://getcomposer.org/) installiert wurde.
@@ -60,11 +60,11 @@ Oberes Beispiel zeigt die Berechnung der Lohnsteuer und Solidaritätszuschlags f
 mit Steuerklasse 1, monatlichem Brutto von 5000€, privat versichert und ohne Arbeitgeberzuschuss für PKV.
 
 Eine detaillierte Erklärung zu den jeweiligen Eingabeparametern findet man entweder im generierten Code in
-Form von Kommentaren oder in der PDF Version des PAP unter https://www.bmf-steuerrechner.de/interface/pap.jsp
+Form von Kommentaren oder in der PDF Version des PAP unter https://www.bmf-steuerrechner.de/interface/programmablauf.xhtml
 
 ## Beispiel 2: Erzeugen einer Python-Datei zur Berechnung der Lohnsteuer für das Jahr 2014 (gleiche Voraussetzungen wie im PHP Beispiel)
 ```bash
-lstgen 2014 python --class-name Lohnsteuer2014 --outfile lst2014.py
+lstgen -p 2014 -l python --class-name Lohnsteuer2014 --outfile lst2014.py
 ```
 
 Der generierte Code kann dann so verwendet werden:
