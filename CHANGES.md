@@ -1,3 +1,6 @@
+# 0.4.1
+* Fixed CLI examples in README
+
 # 0.4.0
 * Added PAP for 2018 and 2019
 * Fixed BMF URIs
