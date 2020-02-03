@@ -115,6 +115,7 @@ lst2014 = Lohnsteuer2014(
     LZZ=2,
     KRV=2
 )
+lst2014.MAIN()
 print_lst(lst2014)
 
 ```
