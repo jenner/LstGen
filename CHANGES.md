@@ -1,3 +1,7 @@
+# 0.4.2
+* add resources for year 2020 (thanks csarn)
+* fix README python example (thanks csarn)
+
 # 0.4.1
 * Fixed CLI examples in README
 
