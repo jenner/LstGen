@@ -188,6 +188,8 @@ class Var(Prop):
                 self.default = '0'
             elif self.type == 'BigDecimal':
                 self.default = 'new BigDecimal(0)'
+            elif self.type == 'double':
+                self.default = '0.0'
         else:
             if self.type == 'int' and '.' in self.default:
                 self.default = str(int(float(self.default)))

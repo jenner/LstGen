@@ -8,7 +8,8 @@ import inspect
 from ... import (
     prepare_expr,
     parse_eval_stmt,
-    parse_condition_stmt
+    parse_condition_stmt,
+    remove_size_literal
 )
 from ..base import BaseGenerator
 from ... import (
@@ -154,17 +155,20 @@ class PythonGenerator(BaseGenerator):
         self._write_stmt_body(stmt)
 
     def _convert_exec(self, expr):
+        expr = remove_size_literal(expr)
         (var, parsed_stmt) = parse_eval_stmt(expr)
         ret = ['self.', var, ' = ']
         ret += self.to_code(parsed_stmt)
         return ''.join(ret)
 
     def _convert_if(self, expr):
+        expr = remove_size_literal(expr)
         compare_stmt = parse_condition_stmt(expr)
         return ''.join(self.to_code(compare_stmt))
 
     def convert_to_python(self, value):
         """ Convert a java-like expression to valid python code """
+        value = remove_size_literal(value)
         tree = ast.parse(prepare_expr(value))
         node = tree.body[0].value
         return ''.join(self.to_code(node))
