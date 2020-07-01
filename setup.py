@@ -23,7 +23,7 @@ testing_extras = requires + [
 ]
 
 setup(name='LstGen',
-    version='0.4.2',
+    version='0.4.3',
     description='LstGen',
     long_description=long_description,
     classifiers=[
@@ -32,6 +32,8 @@ setup(name='LstGen',
         "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "Topic :: Software Development :: Code Generators"
     ],
     author='Igor Stroh',

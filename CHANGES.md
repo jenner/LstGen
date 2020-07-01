@@ -1,3 +1,8 @@
+# 0.4.3
+* fix default value for "double" numbers
+* remove size literals (L/D) in python code
+* improve PAP naming (thanks knipknap)
+
 # 0.4.2
 * add resources for year 2020 (thanks csarn)
 * fix README python example (thanks csarn)
