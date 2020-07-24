@@ -1,5 +1,5 @@
 """
-LstGen generates php, python or java code from PAP XML
+LstGen generates php, python, go, or java code from PAP XML
 """
 import re
 import ast
