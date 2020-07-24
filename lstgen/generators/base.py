@@ -146,7 +146,7 @@ class JavaLikeGenerator(BaseGenerator):
 
     def _convert_exec(self, expr):
         (var, parsed_stmt) = parse_eval_stmt(expr)
-        ret = [self.instance_var+'.', var, ' = ']
+        ret = [self.instance_var, '.', var, ' = ']
         ret += self.to_code(parsed_stmt)
         ret.append(self.stmt_separator)
         return ''.join(ret)

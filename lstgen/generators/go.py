@@ -16,7 +16,7 @@ from .. import (
 from .base import JavaLikeGenerator
 
 class GoGenerator(JavaLikeGenerator):
-    """ Java Generator """
+    """ Go Generator """
     bd_class = 'decimal.Decimal'
     bd_class_constructor = 'decimal.NewFromInt'
     list_const_parens = ('{', '}')
@@ -81,7 +81,6 @@ class GoGenerator(JavaLikeGenerator):
                         const.value = '[{}]'.format(const.value[1:-1])
 
                     value = self.convert_to_go(const.value)
-                    #print("CONST", const.name, const.value, value)
                     wr.writeln('{const.name}: {value},'.format(
                         const=const,
                         value=value
@@ -145,7 +144,7 @@ class GoGenerator(JavaLikeGenerator):
 
     def _conv_list(self, node):
         res = super(GoGenerator, self)._conv_list(node)
-        return ['[]'+self.bd_class]+res
+        return ['[]' + self.bd_class] + res
 
     def _conv_attribute(self, node):
         clsmethod = False
@@ -178,9 +177,8 @@ class GoGenerator(JavaLikeGenerator):
         elif node.attr in ('ROUND_UP', 'ROUND_DOWN'):
             pass
         else:
-            print("Warning: Unmapped attribute, probably broken result:", node.attr)
+            raise NotImplementedError("Warning: Unmapped attribute {}".format(node.attr))
         if clsmethod:
-            #print("NODE", node.value.id, node.attr)
             return ['decimal', self.property_accessor_op, node.attr]
         return (
             self.to_code(node.value) +
@@ -211,14 +209,13 @@ class GoGenerator(JavaLikeGenerator):
                     return 'NewFromInt'
                 except ValueError:
                     return 'NewFromFloat'
-            elif node.__class__.__name__ == 'BinOp' and node.left.__class__.__name__ == 'Constant':
+            elif node.__class__.__name__ == 'BinOp':
                 # For math operations, the type depends on the operators.
                 #print("Call...", node.left, node.op, node.right)
                 return self._get_decimal_constructor_from_node(node.left)
         raise NotImplementedError("unsupported node type {}".format(
             node.__class__.__name__
         ))
-        print("Unsupported ARG:", node.id)
 
     def _conv_call(self, node):
         caller = self.to_code(node.func)
