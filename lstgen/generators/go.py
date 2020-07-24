@@ -70,7 +70,7 @@ class GoGenerator(JavaLikeGenerator):
                     wr.writeln('{} {}'.format(var.name, vartype))
 
         # Define the New() method that also sets default values.
-        with self.writer.indent('func New() *{}'.format(self.class_name)):
+        with self.writer.indent('func New{cls}() *{cls}'.format(cls=self.class_name)):
             with self.writer.indent('return &{}'.format(self.class_name)):
                 wr.writeln("// ------------------------ Constants -------------------------")
                 for const in self.parser.constants:
