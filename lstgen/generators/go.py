@@ -22,6 +22,7 @@ class GoGenerator(JavaLikeGenerator):
     list_const_parens = ('{', '}')
     stmt_separator = ''
     allow_constants = False
+    instance_var = 't'
 
     def __init__(self, parser, outfile, class_name=None, indent=None, package_name='default'):
         super(GoGenerator, self).__init__(parser, outfile, class_name, indent)
@@ -109,24 +110,32 @@ class GoGenerator(JavaLikeGenerator):
         # create setters for input vars
         for var in self.parser.input_vars:
             wr.nl()
-            signature = 'func (this *{cls}) Set{cap}(value {type})'.format(
+            signature = 'func ({instance} *{cls}) Set{cap}(value {type})'.format(
+                instance=self.instance_var,
                 cls=self.class_name,
                 cap=var.name.capitalize(),
                 type=self._convert_vartype(var.type)
             )
             with wr.indent(signature):
-                wr.writeln('this.{} = value'.format(var.name))
+                wr.writeln('{instance}.{name} = value'.format(
+                    instance=self.instance_var,
+                    name=var.name
+                ))
 
         # create getters for output vars
         for var in self.parser.output_vars:
             wr.nl()
-            signature = 'func (this *{cls}) Get{cap}() {type}'.format(
+            signature = 'func ({instance} *{cls}) Get{cap}() {type}'.format(
+                instance=self.instance_var,
                 cls=self.class_name,
                 cap=var.name.capitalize(),
                 type=self._convert_vartype(var.type)
             )
             with wr.indent(signature):
-                wr.writeln('return this.{}'.format(var.name))
+                wr.writeln('return {instance}.{name}'.format(
+                    instance=self.instance_var,
+                    name=var.name
+                ))
 
         self._write_method(self.parser.main_method)
         for method in self.parser.methods:
@@ -255,7 +264,8 @@ class GoGenerator(JavaLikeGenerator):
         self.writer.nl()
         if method.comment:
             self._write_comment(method.comment, False)
-        signature = 'func (this *{cls}) {name}()'.format(
+        signature = 'func ({instance} *{cls}) {name}()'.format(
+            instance=self.instance_var,
             cls=self.class_name,
             name=method.name
         )
