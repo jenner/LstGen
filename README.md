@@ -119,3 +119,68 @@ lst2014.MAIN()
 print_lst(lst2014)
 
 ```
+
+## Beispiel 3: Go
+
+We are going to create the following structure:
+
+```
+.
+├── cmd
+│   ├── main.go
+│   └── start
+├── go.mod
+├── go.sum
+└── tax
+    └── 2014.go
+```
+
+Generate the tax module:
+
+```bash
+mkdir tax
+lstgen -p 2014_1 -l go --class-name Lohnsteuer2014 --outfile tax/2014.go
+```
+
+Create your main.go:
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/shopspring/decimal"
+	"yourpackage.com/tax"
+)
+
+func main() {
+	lst := tax.New()
+	lst.SetRe4(decimal.NewFromInt(50_000_00))  // in cents
+	lst.SetPkv(1)
+	lst.SetAlter1(0)
+	lst.SetAf(0)
+	lst.SetF(1)
+	lst.SetPvs(0)
+	lst.SetR(0)
+	lst.SetLzzhinzu(decimal.NewFromInt(0))
+	lst.SetPvz(0)
+	lst.SetStkl(1)
+	lst.SetLzz(2)
+	lst.SetKrv(2)
+	lst.MAIN()
+	steuer := lst.GetLstlzz().Add(lst.GetStv().Add(lst.GetSts()))
+	soli := lst.GetSolzlzz().Add(lst.GetSolzs().Add(lst.GetSolzv()))
+	res := steuer.Add(soli).Div(decimal.NewFromInt(100))
+	fmt.Printf("%v\n", res.StringFixed(2))
+}
+
+```
+
+To start it:
+
+```bash
+go mod init yourpackage.com
+go mod download
+go build -o cmd/start cmd/main.go
+cmd/start
+```
