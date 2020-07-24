@@ -10,6 +10,7 @@ Zur Zeit werden vier Sprachen unterstützt:
 * Python
 * Java
 * Javascript
+* Go (Golang)
 
 ## Installation
 * Mit `pip` oder `easy_install` aus PyPI:
