@@ -140,6 +140,7 @@ Generate the tax module:
 ```bash
 mkdir tax
 lstgen -p 2014_1 -l go --class-name Lohnsteuer2014 --outfile tax/2014.go
+mkdir cmd
 ```
 
 Create your main.go:

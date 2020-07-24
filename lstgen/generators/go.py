@@ -186,7 +186,7 @@ class GoGenerator(JavaLikeGenerator):
         elif node.attr in ('ROUND_UP', 'ROUND_DOWN'):
             pass
         else:
-            raise NotImplementedError("Warning: Unmapped attribute {}".format(node.attr))
+            raise NotImplementedError("Unmapped attribute {}".format(node.attr))
         if clsmethod:
             return ['decimal', self.property_accessor_op, node.attr]
         return (
