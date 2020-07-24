@@ -121,22 +121,22 @@ print_lst(lst2014)
 
 ```
 
-## Beispiel 3: Go
+## Beispiel 3: Erzeugen eines Go-Moduls zur Berechnung der Lohnsteuer für das Jahr 2014
 
-We are going to create the following structure:
+Folgende Dateistruktur wird benötigt:
 
 ```
 .
-├── cmd
+├── cmd/
 │   ├── main.go
 │   └── start
 ├── go.mod
 ├── go.sum
-└── tax
+└── tax/
     └── 2014.go
 ```
 
-Generate the tax module:
+tax-Modul erzeugen:
 
 ```bash
 mkdir tax
@@ -144,7 +144,7 @@ lstgen -p 2014_1 -l go --class-name Lohnsteuer2014 --outfile tax/2014.go
 mkdir cmd
 ```
 
-Create your main.go:
+Erstellen von main.go:
 
 ```go
 package main
@@ -156,7 +156,7 @@ import (
 )
 
 func main() {
-	lst := tax.New()
+	lst := tax.NewLohnsteuer2014()
 	lst.SetRe4(decimal.NewFromInt(50_000_00))  // in cents
 	lst.SetPkv(1)
 	lst.SetAlter1(0)
@@ -178,7 +178,7 @@ func main() {
 
 ```
 
-To start it:
+Ausführung:
 
 ```bash
 go mod init yourpackage.com
