@@ -90,7 +90,7 @@ def main():
         '--go-package-name',
         dest='go_package',
         metavar='GO_PACKAGE',
-        help="Package-Name (falls LANG=go), standardmässig wird 'default' verwendet",
+        help="Package-Name (falls LANG=go), standardmässig wird 'tax' verwendet",
     )
     parser.add_argument(
         '--php-ns',
