@@ -187,33 +187,38 @@ class GoGenerator(JavaLikeGenerator):
             [self.property_accessor_op, node.attr]
         )
 
-    def _get_decimal_constructor_from_arg(self, arg):
+    def _get_decimal_constructor_from_node(self, node):
         try:
-            int(str(arg.n))
+            int(str(node.n))
             return 'NewFromInt'
         except ValueError:
             return 'NewFromFloat'
-        except AttributeError: # If node.args[0] is not a value, but e.g. a name or a call
+        except AttributeError: # If node.nodes[0] is not a value, but e.g. a name or a call
             # Unfortunately it's not possible to support all cases due to the strict
             # typing of Go. However, we are "lucky":
-            if arg.__class__.__name__ == 'Name':
+            if node.__class__.__name__ == 'Name':
                 # For now, all variable assignments that create new values happen to be integers.
-                #print("Name...", arg.id)
+                #print("Name...", node.id)
                 return 'NewFromInt'
-            elif arg.__class__.__name__ == 'Call':
-                # The argument is a function call. Again, luckily, the only function calls in
+            elif node.__class__.__name__ == 'Call':
+                # The nodeument is a function call. Again, luckily, the only function calls in
                 # assignments are calls to Decimal methods, which we can ensure to return int64.
-                #print("Call...", arg.func.attr)
+                #print("Call...", node.func.attr)
                 return 'NewFromInt'
-            elif arg.__class__.__name__ == 'BinOp':
-                # Again, for math operations, we are luckily: Only integer
-                # multiplication is used.
-                #print("Call...", arg.left, arg.right.id)
-                return 'NewFromInt'
+            elif node.__class__.__name__ == 'Constant':
+                try:
+                    int(str(node.value))
+                    return 'NewFromInt'
+                except ValueError:
+                    return 'NewFromFloat'
+            elif node.__class__.__name__ == 'BinOp' and node.left.__class__.__name__ == 'Constant':
+                # For math operations, the type depends on the operators.
+                #print("Call...", node.left, node.op, node.right)
+                return self._get_decimal_constructor_from_node(node.left)
         raise NotImplementedError("unsupported node type {}".format(
-            arg.__class__.__name__
+            node.__class__.__name__
         ))
-        print("Unsupported ARG:", arg.id)
+        print("Unsupported ARG:", node.id)
 
     def _conv_call(self, node):
         caller = self.to_code(node.func)
@@ -233,7 +238,7 @@ class GoGenerator(JavaLikeGenerator):
 
         # Fix integer initialization-
         elif caller[-1] == 'NewFromInt':
-            caller[-1] = self._get_decimal_constructor_from_arg(node.args[0])
+            caller[-1] = self._get_decimal_constructor_from_node(node.args[0])
 
         args = []
         for (idx, arg) in enumerate(node.args):
