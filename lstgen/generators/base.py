@@ -93,6 +93,9 @@ class BaseGenerator(AstToCode):
 class JavaLikeGenerator(BaseGenerator):
     """ Base generator for java-like code syntax """
 
+    stmt_separator = ';'
+    """ Line endings (usually a ";" or empty) """
+
     instance_var = 'this'
     """ Name of the implicit instance variable (if any) """
 
@@ -115,7 +118,11 @@ class JavaLikeGenerator(BaseGenerator):
             if isinstance(part, EvalStmt):
                 self.writer.writeln(self._convert_exec(part.expr))
             elif isinstance(part, ExecuteStmt):
-                self.writer.writeln('this.{}();'.format(part.method_name))
+                self.writer.writeln('{}.{}(){}'.format(
+                    self.instance_var,
+                    part.method_name,
+                    self.stmt_separator
+                ))
             elif isinstance(part, IfStmt):
                 self._write_if(part)
             elif isinstance(part, ElseStmt):
@@ -139,9 +146,9 @@ class JavaLikeGenerator(BaseGenerator):
 
     def _convert_exec(self, expr):
         (var, parsed_stmt) = parse_eval_stmt(expr)
-        ret = ['this.', var, ' = ']
+        ret = [self.instance_var+'.', var, ' = ']
         ret += self.to_code(parsed_stmt)
-        ret.append(';')
+        ret.append(self.stmt_separator)
         return ''.join(ret)
 
     def _convert_if(self, expr):

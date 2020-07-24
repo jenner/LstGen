@@ -87,6 +87,12 @@ def main():
         help="Package-Name (falls LANG=java), standardmässig wird 'default' verwendet",
     )
     parser.add_argument(
+        '--go-package-name',
+        dest='go_package',
+        metavar='GO_PACKAGE',
+        help="Package-Name (falls LANG=go), standardmässig wird 'default' verwendet",
+    )
+    parser.add_argument(
         '--php-ns',
         dest='php_ns',
         metavar='PHP_NAMESPACE',
@@ -141,6 +147,14 @@ def main():
                 pap_parser,
                 outfp,
                 class_name=args.class_name,
+                indent=args.indent
+            )
+        elif lang == 'go':
+            generator = gen_class(
+                pap_parser,
+                outfp,
+                class_name=args.class_name,
+                package_name=args.go_package,
                 indent=args.indent
             )
         elif lang == 'java':
