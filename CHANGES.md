@@ -1,11 +1,14 @@
+# 0.5.0
+* Added Go support (thanks knipknap for the code and Dexus for the review!)
+
 # 0.4.3
-* fix default value for "double" numbers
-* remove size literals (L/D) in python code
-* improve PAP naming (thanks knipknap)
+* Fixed default value for "double" numbers
+* Removee size literals (L/D) in python code
+* Improved PAP naming (thanks knipknap)
 
 # 0.4.2
-* add resources for year 2020 (thanks csarn)
-* fix README python example (thanks csarn)
+* Added resources for year 2020 (thanks csarn)
+* Fixed README python example (thanks csarn)
 
 # 0.4.1
 * Fixed CLI examples in README
