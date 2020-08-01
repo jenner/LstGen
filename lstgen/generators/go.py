@@ -148,7 +148,7 @@ class GoGenerator(JavaLikeGenerator):
             'BigDecimal[]': '[]'+self.bd_class,
             'BigDecimal': ''+self.bd_class,
             'int': 'int64',
-            'double': 'int64',
+            'double': 'float64',
         }[vartype]
 
     def _conv_list(self, node):
