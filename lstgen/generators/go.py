@@ -27,6 +27,7 @@ class GoGenerator(JavaLikeGenerator):
     def __init__(self, parser, outfile, class_name=None, indent=None, package_name='default'):
         super(GoGenerator, self).__init__(parser, outfile, class_name, indent)
         self.package_name = package_name
+        self.type_map = {}   # Keep a list of known variable types
 
     def generate(self):
         wr = self.writer
@@ -52,6 +53,7 @@ class GoGenerator(JavaLikeGenerator):
                     const=const,
                     thetype=thetype
                 ))
+                self.type_map[const.name] = thetype
 
             for (comment, variables) in [
                     ('Input variables', self.parser.input_vars),
@@ -68,6 +70,7 @@ class GoGenerator(JavaLikeGenerator):
                         self._write_comment(var.comment, False)
                     vartype = self._convert_vartype(var.type)
                     wr.writeln('{} {}'.format(var.name, vartype))
+                    self.type_map[var.name] = vartype
 
         # Define the New() method that also sets default values.
         with self.writer.indent('func New{cls}() *{cls}'.format(cls=self.class_name)):
@@ -205,11 +208,16 @@ class GoGenerator(JavaLikeGenerator):
             # typing of Go. However, we are "lucky":
             if node.__class__.__name__ == 'Name':
                 # For now, all variable assignments that create new values happen to be integers.
-                #print("Name...", node.id)
-                return 'NewFromInt'
+                rtype = self.type_map.get(node.id)
+                if rtype == 'int64':
+                    return 'NewFromInt'
+                elif rtype == 'float64':
+                    return 'NewFromFloat'
+                raise NotImplementedError(node.id+' has unsupported type '+repr(rtype))
             elif node.__class__.__name__ == 'Call':
-                # The nodeument is a function call. Again, luckily, the only function calls in
-                # assignments are calls to Decimal methods, which we can ensure to return int64.
+                # The node is a function call. Luckily so far, all calls return integers...
+                # luckily, the only function calls in assignments are calls to Decimal methods,
+                # which we can ensure to return int64
                 #print("Call...", node.func.attr)
                 return 'NewFromInt'
             elif node.__class__.__name__ == 'Constant':
