@@ -1,3 +1,6 @@
+# 0.5.1
+* Added fix for double types in Go (thanks knipknap)
+
 # 0.5.0
 * Added Go support (thanks knipknap for the code and Dexus for the review!)
 
