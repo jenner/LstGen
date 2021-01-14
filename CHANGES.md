@@ -1,3 +1,6 @@
+# 0.5.2
+* Added resources for year 2020 (thanks 0xCCD)
+
 # 0.5.1
 * Added fix for double types in Go (thanks knipknap)
 
