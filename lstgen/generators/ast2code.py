@@ -3,6 +3,7 @@
 AST to code converter base class
 """
 import ast
+import astunparse
 
 
 class AstToCode(object):
@@ -131,10 +132,15 @@ class AstToCode(object):
         return [op] + self.to_code(node.operand)
 
     def _conv_list_subscript(self, node):
+        try:
+            idx = node.slice.value
+        except AttributeError:
+            # python3.9 deprecated the ast.Index class for slices
+            idx = node.slice
         return (
             self.to_code(node.value) +
             [self.list_subscription_parens[0]] +
-            self.to_code(node.slice.value) +
+            self.to_code(idx) +
             [self.list_subscription_parens[1]]
         )
 
