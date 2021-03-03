@@ -3,7 +3,6 @@
 AST to code converter base class
 """
 import ast
-import astunparse
 
 
 class AstToCode(object):
