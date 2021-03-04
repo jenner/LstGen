@@ -26,6 +26,7 @@ setup(name='LstGen',
     version='0.5.3',
     description='LstGen',
     long_description=long_description,
+    long_description_content_type='text/markdown',
     classifiers=[
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7",
