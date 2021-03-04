@@ -1,53 +1,55 @@
-# 0.5.3
+# Changes
+
+## 0.5.3
 * Added python3.9 ast module compatiblity
 
-# 0.5.2
+## 0.5.2
 * Added resources for year 2020 (thanks 0xCCD)
 
-# 0.5.1
+## 0.5.1
 * Added fix for double types in Go (thanks knipknap)
 
-# 0.5.0
+## 0.5.0
 * Added Go support (thanks knipknap for the code and Dexus for the review!)
 
-# 0.4.3
+## 0.4.3
 * Fixed default value for "double" numbers
 * Removee size literals (L/D) in python code
 * Improved PAP naming (thanks knipknap)
 
-# 0.4.2
+## 0.4.2
 * Added resources for year 2020 (thanks csarn)
 * Fixed README python example (thanks csarn)
 
-# 0.4.1
+## 0.4.1
 * Fixed CLI examples in README
 
-# 0.4.0
+## 0.4.0
 * Added PAP for 2018 and 2019
 * Fixed BMF URIs
 * Added "version" cli option 
 
-# 0.3.2
+## 0.3.2
 * Make pypi happy
 
-# 0.3.1
+## 0.3.1
 * Added support for 2017 PAP
 * Fixed unary operator conversion
 * Replaced Decimal.\_rescale with Decimal.quantize to
   remain python3 compliant
 
-# 0.3.0
+## 0.3.0
 * Added JS support
 * Refactored generators for java-like languages
 * Cleaned up a bit to satisfy pylint
 
-# 0.2.0
+## 0.2.0
 * Refactored writers to generators
 * Added basic tests
 * Added BigDecimal PHP proxy class
 
-# 0.1.1
+## 0.1.1
 * Fixed packaging issues for README.md and CHANGES.md
 
-# 0.1.0
+## 0.1.0
 * Initial version
