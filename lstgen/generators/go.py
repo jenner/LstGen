@@ -218,7 +218,6 @@ class GoGenerator(JavaLikeGenerator):
                 # The node is a function call. Luckily so far, all calls return integers...
                 # luckily, the only function calls in assignments are calls to Decimal methods,
                 # which we can ensure to return int64
-                #print("Call...", node.func.attr)
                 return 'NewFromInt'
             elif node.__class__.__name__ == 'Constant':
                 try:
@@ -228,7 +227,6 @@ class GoGenerator(JavaLikeGenerator):
                     return 'NewFromFloat'
             elif node.__class__.__name__ == 'BinOp':
                 # For math operations, the type depends on the operators.
-                #print("Call...", node.left, node.op, node.right)
                 return self._get_decimal_constructor_from_node(node.left)
         raise NotImplementedError("unsupported node type {}".format(
             node.__class__.__name__
@@ -268,7 +266,6 @@ class GoGenerator(JavaLikeGenerator):
         )
 
     def _write_method(self, method):
-        #print("METH", dir(method))
         self.writer.nl()
         if method.comment:
             self._write_comment(method.comment, False)
