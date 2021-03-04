@@ -1,3 +1,6 @@
+# 0.5.3
+* Added python3.9 ast module compatiblity
+
 # 0.5.2
 * Added resources for year 2020 (thanks 0xCCD)
 
