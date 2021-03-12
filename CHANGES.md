@@ -1,5 +1,8 @@
 # Changes
 
+## 0.5.4
+* Added php BigDecimal fixes (thanks tburschka)
+
 ## 0.5.3
 * Added python3.9 ast module compatiblity
 
