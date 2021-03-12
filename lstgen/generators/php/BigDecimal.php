@@ -3,7 +3,8 @@ use Brick\Math\RoundingMode as RoundingMode;
 
 /**
  * A proxy class to use BigDecimal methods
- * as they are found in PAP XML
+ * as they are found in PAP XML.
+ * Requires brick/math >= 0.6.0
  */
 class BigDecimal {
 
@@ -32,7 +33,7 @@ class BigDecimal {
     }
 
     public function setScale($scale, $rounding) {
-        return new BigDecimal($this->bd->withScale($scale, $rounding));
+        return new BigDecimal($this->bd->toScale($scale, $rounding));
     }
 
     public function add($other) {
@@ -44,7 +45,7 @@ class BigDecimal {
     }
 
     public function longValue() {
-        return $this->bd->toInteger();
+        return $this->bd->toInt();
     }
 
     public function floatValue() {
