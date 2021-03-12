@@ -3,7 +3,8 @@ use Brick\Math\RoundingMode as RoundingMode;
 
 /**
  * A proxy class to use BigDecimal methods
- * as they are found in PAP XML
+ * as they are found in PAP XML.
+ * Requires brick/math >= 0.6.0
  */
 class BigDecimal {
 
