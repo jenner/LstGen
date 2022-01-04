@@ -5,3 +5,4 @@ dist
 .coverage
 .tox
 build/
+lohn2021.go
