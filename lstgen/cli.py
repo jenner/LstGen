@@ -10,9 +10,9 @@ import pkg_resources
 
 from lxml import etree
 
-from . import PapParser
-from . import pap
-from .generators import GENERATORS
+from lstgen import PapParser
+from lstgen import pap
+from lstgen.generators import GENERATORS
 
 LANGUAGES = sorted(GENERATORS.keys())
 
@@ -181,3 +181,5 @@ def main():
                 indent=args.indent
             )
         generator.generate()
+
+main()

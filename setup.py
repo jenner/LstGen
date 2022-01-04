@@ -23,7 +23,7 @@ testing_extras = requires + [
 ]
 
 setup(name='LstGen',
-    version='0.5.5',
+    version='0.5.6',
     description='LstGen',
     long_description=long_description,
     long_description_content_type='text/markdown',

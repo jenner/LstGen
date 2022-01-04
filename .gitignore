@@ -6,3 +6,7 @@ dist
 .tox
 build/
 lohn2021.go
+.idea/
+gen/*.go
+gen/*.php
+gen/*.java
