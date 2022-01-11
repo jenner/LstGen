@@ -19,6 +19,11 @@ class JavascriptGenerator(JavaLikeGenerator):
 
     def generate(self):
         wr = self.writer
+
+        wr.writeln("// the generated code requires a big decimal implementation, you can for example use `npm install bigdecimal`");
+        wr.writeln("// const big = require('../node_modules/bigdecimal')");
+        wr.writeln("// const BigDecimal = big.BigDecimal;");
+
         with self.writer.indent('function {}(params)'.format(self.class_name)):
             # create input and output vars
             for (comment, variables, is_input) in [
@@ -88,6 +93,8 @@ class JavascriptGenerator(JavaLikeGenerator):
         self._write_method(self.parser.main_method)
         for method in self.parser.methods:
             self._write_method(method)
+
+        wr.writeln('module.exports = {};'.format(self.class_name));
 
     def _write_method(self, method):
         self.writer.nl()
