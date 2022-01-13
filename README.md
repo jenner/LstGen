@@ -191,11 +191,11 @@ cmd/start
 
 ```lstgen -p 2022_1 -l javascript --class-name Lohnsteuer2022 --outfile Lohnsteuer2022.js```
 
-Das generierte Node Module erfordert eine BigDecimal implementierung.
+Das generierte Node Module erfordert eine BigDecimal Implementierung.
 
 Dafür kann man zum Beispiel folgendes npm installieren: `npm install bigdecimal`
 
-Um eine Ordungsgemäße Nutzung der Klasse zu Garantieren, muss man das BigDecimal des NPM wie folgt neu Definieren
+Um eine ordungsgemäße Nutzung der Klasse zu garantieren, muss man das BigDecimal des NPM wie folgt neu definieren
 
 ```
 const big = require('../node_modules/bigdecimal')
