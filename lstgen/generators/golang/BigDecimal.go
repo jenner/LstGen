@@ -18,7 +18,7 @@ func (d BigDecimal) Divide(other BigDecimal, roundParams ...int) BigDecimal {
 	rounding := 0
 	if len(roundParams) == 2 {
 		scale = roundParams[0]
-		rounding = roundParams[0]
+		rounding = roundParams[1]
 	} else {
 		return BigDecimal{d.V / other.V}
 	}
