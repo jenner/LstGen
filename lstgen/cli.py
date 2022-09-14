@@ -10,9 +10,9 @@ import pkg_resources
 
 from lxml import etree
 
-from lstgen import PapParser
-from lstgen import pap
-from lstgen.generators import GENERATORS
+from . import PapParser
+from . import pap
+from .generators import GENERATORS
 
 LANGUAGES = sorted(GENERATORS.keys())
 

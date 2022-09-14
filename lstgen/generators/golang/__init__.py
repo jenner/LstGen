@@ -288,7 +288,7 @@ class GoLangGenerator(JavaLikeGenerator):
             self._write_stmt_body(method)
 
     def convert_to_go(self, value):
-        """ Converts java pseudo code into valid java code """
+        """ Converts java pseudo code into valid go code """
         tree = ast.parse(prepare_expr(value))
         node = tree.body[0].value
         return ''.join(self.to_code(node))
