@@ -181,5 +181,3 @@ def main():
                 indent=args.indent
             )
         generator.generate()
-
-main()
