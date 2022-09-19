@@ -157,6 +157,14 @@ def main():
                 package_name=args.go_package,
                 indent=args.indent
             )
+        elif lang == 'golang':
+            generator = gen_class(
+                pap_parser,
+                outfp,
+                class_name=args.class_name,
+                package_name=args.go_package,
+                indent=args.indent
+            )    
         elif lang == 'java':
             generator = gen_class(
                 pap_parser,

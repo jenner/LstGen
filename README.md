@@ -140,8 +140,11 @@ tax-Modul erzeugen:
 
 ```bash
 mkdir tax
-lstgen -p 2014_1 -l go --class-name Lohnsteuer2014 --outfile tax/2014.go
+lstgen -p 2014_1 -l go --go-package-name Lohnsteuer2014 --outfile tax/2014.go
 mkdir cmd
+
+alternativ für 2022 via python das gen Verzeichnis:
+python cli.py -p 2022_1 -l golang --go-package-name income_tax --outfile ../gen/2022.go
 ```
 
 Erstellen von main.go:

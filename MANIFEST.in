@@ -1,2 +1,2 @@
 include *.txt *.ini *.cfg *.rst *.md
-recursive-include lstgen *.xml *.php
+recursive-include lstgen *.xml *.php *.go
