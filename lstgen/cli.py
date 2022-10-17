@@ -40,7 +40,7 @@ def main():
         dest='lang',
         choices=LANGUAGES,
         metavar='LANG',
-        help='Programmiersprache (PHP, Python oder Java)')
+        help='Programmiersprache ({})'.format(', '.join(LANGUAGES)))
     parser.add_argument(
         '-p', '--pap-version',
         dest='pap_version',
@@ -90,7 +90,7 @@ def main():
         '--go-package-name',
         dest='go_package',
         metavar='GO_PACKAGE',
-        help="Package-Name (falls LANG=go), standardmässig wird 'tax' verwendet",
+        help="Package-Name (falls LANG=golang), standardmässig wird 'tax' verwendet",
     )
     parser.add_argument(
         '--php-ns',
@@ -147,14 +147,6 @@ def main():
                 pap_parser,
                 outfp,
                 class_name=args.class_name,
-                indent=args.indent
-            )
-        elif lang == 'go':
-            generator = gen_class(
-                pap_parser,
-                outfp,
-                class_name=args.class_name,
-                package_name=args.go_package,
                 indent=args.indent
             )
         elif lang == 'golang':
