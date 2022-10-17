@@ -134,14 +134,22 @@ class PythonGenerator(BaseGenerator):
             elif isinstance(part, ExecuteStmt):
                 self.writer.writeln('self.{}()'.format(part.method_name))
             elif isinstance(part, IfStmt):
-                self._write_if(part)
+                then_stmts = part.body[0].body
+                stmt_count = len(then_stmts) == 0
+                if stmt_count:
+                    else_stmt = part.body[1]
+                    then = ThenStmt(else_stmt.comment)
+                    for new_stmt in else_stmt.body:
+                        then.add(new_stmt)
+                    part.body = [then]
+                self._write_if(part, stmt_count)
             elif isinstance(part, ElseStmt):
                 self._write_else(part)
             elif isinstance(part, ThenStmt):
                 self._write_stmt_body(part)
 
-    def _write_if(self, stmt):
-        converted = self._convert_if(stmt.condition)
+    def _write_if(self, stmt, stmt_count=False):
+        converted = self._convert_if(stmt.condition, stmt_count)
         with self.writer.indent('if {}'.format(converted)):
             self._write_stmt_body(stmt)
 
@@ -161,10 +169,14 @@ class PythonGenerator(BaseGenerator):
         ret += self.to_code(parsed_stmt)
         return ''.join(ret)
 
-    def _convert_if(self, expr):
+    def _convert_if(self, expr, stmt_count):
         expr = remove_size_literal(expr)
         compare_stmt = parse_condition_stmt(expr)
-        return ''.join(self.to_code(compare_stmt))
+        if_cond = self.to_code(compare_stmt)
+        if stmt_count:
+            if_cond.insert(0, "not(")
+            if_cond.append(")")
+        return ''.join(if_cond)
 
     def convert_to_python(self, value):
         """ Convert a java-like expression to valid python code """
