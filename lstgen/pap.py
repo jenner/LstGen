@@ -90,6 +90,10 @@ PAP_RESOURCES = OrderedDict((
         '/interface/2022Version1.xhtml',
         '/javax.faces.resource/daten/xmls/Lohnsteuer2022.xml.xhtml'
     )),
+    ('2023_2', PapResource(
+        '/interface/2023Version1.xhtml',
+        '/javax.faces.resource/daten/xmls/Lohnsteuer2023.xml.xhtml'
+    )),
 ))
 
 
