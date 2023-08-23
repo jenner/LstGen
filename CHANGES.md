@@ -1,5 +1,8 @@
 # Changes
 
+## 0.6.2
+* Added 2023 PAP from July
+
 ## 0.6.1
 * Added 2023 PAP
 
