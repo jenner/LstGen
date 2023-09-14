@@ -61,9 +61,17 @@ func (d BigDecimal) SetScale(scale int, rounding int) BigDecimal {
 
 	var v float64
 	if rounding == ROUND_DOWN {
-		v = math.Floor(d.V * exp)
+		if d.V < 0 {
+			v = math.Ceil(d.V * exp)
+		} else {
+			v = math.Floor(d.V * exp)
+		}
 	} else if rounding == ROUND_UP {
-		v = math.Ceil(d.V * exp)
+		if d.V < 0 {
+			v = math.Floor(d.V * exp)
+		} else {
+			v = math.Ceil(d.V * exp)
+		}
 	} else {
 		v = math.Round(d.V * exp)
 	}
