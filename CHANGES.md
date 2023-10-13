@@ -1,5 +1,8 @@
 # Changes
 
+## 0.6.3
+* Added fix for rounding in BigDecimal.SetScale for golang. (thanks Markus)
+
 ## 0.6.2
 * Added 2023 PAP from July
 
