@@ -1,5 +1,8 @@
 # Changes
 
+## 0.6.6
+* Added 2025 PAP
+
 ## 0.6.5
 * Added 2024 december PAP
 
