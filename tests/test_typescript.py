@@ -78,6 +78,23 @@ class TestTypescript(unittest.TestCase):
         assert self.generator._convert_if('INFOO == 1') == 'this.INFOO === 1'
         assert self.generator._convert_exec('INFOO = 10L') == 'this.INFOO = 10;'
 
+    def test_asserts_pap_array_accesses_non_null(self):
+        assert self.generator.convert_to_typescript(
+            'CONSTARRAY[INFOO]'
+        ) == 'Lohnsteuer2100.CONSTARRAY[this.INFOO]!'
+        assert self.generator.convert_to_typescript(
+            'CONSTARRAY[INFOO].divide(INBAR)'
+        ) == 'Lohnsteuer2100.CONSTARRAY[this.INFOO]!.divide(this.INBAR)'
+        assert self.generator._convert_exec(
+            'OUTFOO = CONSTARRAY[INFOO]'
+        ) == 'this.OUTFOO = Lohnsteuer2100.CONSTARRAY[this.INFOO]!;'
+        assert self.generator._convert_if(
+            'CONSTARRAY[INFOO].compareTo(INBAR) == 1'
+        ) == (
+            'Lohnsteuer2100.CONSTARRAY[this.INFOO]!'
+            '.compareTo(this.INBAR) === 1'
+        )
+
     def test_registered_as_cli_language(self):
         assert GENERATORS['typescript'] is TypescriptGenerator
         assert 'typescript' in LANGUAGES

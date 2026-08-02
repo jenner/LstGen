@@ -197,6 +197,13 @@ class TypescriptGenerator(JavaLikeGenerator):
                 return self.to_code(node.func.value) + ['.numberValue()']
         return super(TypescriptGenerator, self)._conv_call(node)
 
+    def _conv_list_subscript(self, node):
+        """Assert that PAP-controlled array indices resolve to a value."""
+        return (
+            super(TypescriptGenerator, self)._conv_list_subscript(node) +
+            ['!']
+        )
+
     def _conv_number(self, node):
         if isinstance(node.value, str):
             return [json.dumps(node.value, ensure_ascii=False)]
