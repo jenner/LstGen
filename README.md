@@ -10,6 +10,7 @@ Folgende Programmiersprachen werden zur Zeit unterstützt:
 * Python
 * Java
 * Javascript
+* TypeScript
 * Go
 
 ## Installation
@@ -205,4 +206,40 @@ Anschliessend kann man das Modul wie folgt nutzen:
 
 ```
 const Lohnsteuer2022 = require('Lohnsteuer2022');
+```
+
+## Beispiel 5: Erzeugen einer TypeScript-Klasse zur Berechnung der Lohnsteuer
+
+Der generierte Code verwendet das Paket
+[`bigdecimal.js`](https://www.npmjs.com/package/bigdecimal.js), das
+TypeScript-Typdefinitionen mitbringt:
+
+```bash
+npm install bigdecimal.js
+lstgen -p 2026_1 -l typescript --class-name Lohnsteuer2026 --outfile Lohnsteuer2026.ts
+```
+
+Die Klasse und ihr Parameter-Interface werden als ES-Modul exportiert.
+`BigDecimal`-Eingaben akzeptieren exakte Dezimalstrings:
+
+```typescript
+import { Lohnsteuer2026 } from './Lohnsteuer2026';
+
+const lohnsteuer = new Lohnsteuer2026({
+    RE4: '500000',
+    PKV: 1,
+    ALTER1: 0,
+    af: 0,
+    f: 1,
+    PVS: 0,
+    R: 0,
+    LZZHINZU: '0',
+    PVZ: 0,
+    STKL: 1,
+    LZZ: 2,
+    KRV: 2,
+});
+
+lohnsteuer.MAIN();
+console.log(lohnsteuer.getLstlzz().toString());
 ```

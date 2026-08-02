@@ -1,0 +1,54 @@
+<PAP name="Lohnsteuer2100" version="1.0" versionNummer="1.0">
+<VARIABLES>
+    <INPUTS>
+        <!-- input var INFOO, type int, default 1 -->
+        <INPUT name="INFOO" type="int" default="1"/>
+
+        <!-- input var INBAR, type BigDecimal, no default -->
+        <INPUT name="INBAR" type="BigDecimal"/>
+
+        <INPUT name="INBLAH" type="int"/>
+        <INPUT name="INDOUBLE" type="double" default="0.5"/>
+    </INPUTS>
+    <OUTPUTS>
+        <!-- output var OUTFOO with ümläüts -->
+        <OUTPUT name="OUTFOO" type="BigDecimal"/>
+
+        <!-- output var OUTBAR with default -->
+        <OUTPUT name="OUTBAR" type="BigDecimal" default="new BigDecimal(20.1)"/>
+
+        <OUTPUT name="OUTBLAH" type="int"/>
+    </OUTPUTS>
+    <INTERNALS>
+        <!-- internal var INTFOO with ümläüts -->
+        <INTERNAL name="INTFOO" type="BigDecimal"/>
+
+        <!-- internal var INTBAR with default -->
+        <INTERNAL name="INTBAR" type="BigDecimal" default="new BigDecimal(20.1)"/>
+
+        <INTERNAL name="INTBLAH" type="int"/>
+    </INTERNALS>
+</VARIABLES>
+<CONSTANTS>
+    <!-- constant CONSTZAHL1 -->
+    <CONSTANT name="CONSTFOO" type="BigDecimal" value="BigDecimal.ONE"/>
+    <CONSTANT name="CONSTARRAY" type="BigDecimal[]" value="{BigDecimal.ZERO, BigDecimal.valueOf(2)}"/>
+</CONSTANTS>
+<METHODS>
+    <MAIN>
+        <EXECUTE method="MFOO"/>
+        <EVAL exec="INTBAR= BigDecimal.ZERO"/>
+        <EXECUTE method="MBAR"/>
+    </MAIN>
+
+    <!-- method MFOO -->
+    <METHOD name="MFOO">
+        <EVAL exec="OUTBLAH = INTFOO.compareTo(INTBAR)"/>
+    </METHOD>
+
+    <!-- method MBAR -->
+    <METHOD name="MBAR">
+        <EVAL exec="OUTBAR = INBAR.divide(OUTBAR, 2, BigDecimal.ROUND_UP)"/>
+    </METHOD>
+</METHODS>
+</PAP>

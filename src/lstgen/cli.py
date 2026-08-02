@@ -172,4 +172,11 @@ def main():
                 class_name=args.class_name,
                 indent=args.indent
             )
+        elif lang == 'typescript':
+            generator = gen_class(
+                pap_parser,
+                outfp,
+                class_name=args.class_name,
+                indent=args.indent
+            )
         generator.generate()
